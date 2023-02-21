@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TV Shows App</string>
+    <string name="tvmazshows">TV Maze Shows</string>
+    <string name="app_theme">About the App</string>
+    <string name="settings">Setting</string>
+    <string name="version_">Version desc</string>
+    <string name="version_0_1">Version 1.0</string>
+    <string name="favorite_shows">Favorite Tv Shows</string>
+    <string name="setting_top_app_bar">Setting</string>
+    <string name="about">About</string>
+    <string name="list_of_shows">List of Shows</string>
+    <string name="about_text">This App provides list of MAze TV shows. The user can save favorite shows and be able to delete as well. This app is a sample app to apply design pattern and architectures</string>
+</resources>

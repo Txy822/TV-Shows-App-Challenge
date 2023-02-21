@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "20107902268",
+    "project_id": "news-app-1d2c1",
+    "storage_bucket": "news-app-1d2c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20107902268:android:6c087d04010a06c8cdf239",
+        "android_client_info": {
+          "package_name": "com.news.news_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20107902268-2iqseloaau846cl44n9lgnnr6mdpvmrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoMkOG3o0_U70IacQZylLuP8JQr1m-dRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20107902268-2iqseloaau846cl44n9lgnnr6mdpvmrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20107902268:android:ce802fa5d80f9b75cdf239",
+        "android_client_info": {
+          "package_name": "com.tes.eat.anywhere.tvshowsapp.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20107902268-2iqseloaau846cl44n9lgnnr6mdpvmrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoMkOG3o0_U70IacQZylLuP8JQr1m-dRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20107902268-2iqseloaau846cl44n9lgnnr6mdpvmrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
