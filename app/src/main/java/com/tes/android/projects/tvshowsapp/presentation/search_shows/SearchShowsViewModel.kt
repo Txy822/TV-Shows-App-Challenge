@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tes.android.projects.tvshowsapp.domain.model.ShowDetail
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
-import com.tes.android.projects.tvshowsapp.domain.use_case.FavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
 import com.tes.android.projects.tvshowsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class SearchShowsViewModel @Inject constructor(
     private val repository: ShowRepository,
     private val dispatcher: CoroutineDispatcher,
-    private val favoriteUseCase: FavoriteUseCase
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SearchShowsState())
 
@@ -35,7 +37,6 @@ class SearchShowsViewModel @Inject constructor(
                 getShowListings(fetchFromRemote = true)
             }
             is SearchShowsEvent.OnSearchQueryChange -> {
-               // _uiState.value = SearchShowsState(searchQuery = event.query)
                 _uiState.update { it.copy(searchQuery = event.query) }
 
                 searchJob = viewModelScope.launch {
@@ -44,15 +45,10 @@ class SearchShowsViewModel @Inject constructor(
                 }
             }
             is SearchShowsEvent.OnFavoriteSelected -> {
-                // _uiState.value = _uiState.value.copy(show = event.show)
-
-               // _uiState.value = SearchShowsState(show = event.show)
                 _uiState.update { it.copy(show = event.show) }
                 addFavorite()
-
             }
             is SearchShowsEvent.DeleteFavorite-> {
-              //  _uiState.value = _uiState.value.copy(id = event.id)
                 _uiState.update { it.copy(id=event.id) }
                 deleteFavorite()
             }
@@ -66,7 +62,7 @@ class SearchShowsViewModel @Inject constructor(
         id: Int = _uiState.value.id
     ) {
         viewModelScope.launch(dispatcher) {
-            repository.deleteFavoriteById(id)
+            deleteFavoriteUseCase.deleteFavorite(id)
         }
     }
 
@@ -74,7 +70,7 @@ class SearchShowsViewModel @Inject constructor(
         show: ShowDetail = _uiState.value.show
     ) {
         viewModelScope.launch(dispatcher) {
-            favoriteUseCase.addFavorite(show)
+            addFavoriteUseCase.addFavorite(show)
         }
     }
 
@@ -89,18 +85,14 @@ class SearchShowsViewModel @Inject constructor(
                     when (result) {
                         is Resource.Success -> {
                             result.data?.let { listings ->
-                                // copy of  current state so that we can change the listing
-                               // _uiState.value = _uiState.value.copy(shows = listings)
                                 _uiState.update { it.copy(shows=listings) }
                             }
-                           // _uiState.value = _uiState.value.copy()
+                            _uiState.value = _uiState.value.copy()
                         }
                         is Resource.Error -> {
-                           // _uiState.value = _uiState.value.copy(error = "Error message")
                             _uiState.update { it.copy(error = "Error message") }
                         }
                         is Resource.Loading -> {
-                           // _uiState.value = _uiState.value.copy(isLoading = result.isLoading)
                             _uiState.update { it.copy(isLoading = result.isLoading) }
                         }
                     }

@@ -131,7 +131,6 @@ fun FavoriteScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start=40.dp,top = 30.dp,)
-            //  .align(Alignment.Center)
         )
     }
 

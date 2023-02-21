@@ -47,7 +47,6 @@ fun ShowListScreen(
             modifier = Modifier.fillMaxSize()
         ) {
 
-            //TopAppBarContent()
             TopAppBarContentForListOfShows(
                 navController
             )
@@ -59,7 +58,6 @@ fun ShowListScreen(
                 }
             ) {
                 LazyColumn(
-                    //modifier = Modifier.fillMaxSize()
                     modifier = Modifier.padding(10.dp)
                 ) {
                     items(shows.size) { i ->

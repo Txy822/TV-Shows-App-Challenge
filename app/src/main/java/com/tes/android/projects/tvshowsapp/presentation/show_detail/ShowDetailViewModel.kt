@@ -23,8 +23,6 @@ class ShowDetailViewModel @Inject constructor(
 ) : ViewModel() {
     var state by mutableStateOf(ShowDetailState())
 
-
-
     fun onEvent(event: ShowDetailEvent) {
         when (event) {
 
@@ -43,11 +41,6 @@ class ShowDetailViewModel @Inject constructor(
             }
         }
     }
-
-
-
-
-
 
     init {
         viewModelScope.launch(dispatcher) {
@@ -97,5 +90,4 @@ class ShowDetailViewModel @Inject constructor(
             repository.insertFavoriteShowToDb(show)
         }
     }
-
 }

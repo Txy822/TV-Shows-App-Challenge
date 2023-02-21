@@ -82,7 +82,6 @@ class TvShowDaoTest {
         showDao.insertShowListings(showListingEntityList)
 
         assertThat(showDao.getSingleShowFromDB("name1")).isEqualTo(showOne)
-
     }
 
    @Test

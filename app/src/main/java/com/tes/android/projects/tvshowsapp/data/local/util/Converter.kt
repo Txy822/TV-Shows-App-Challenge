@@ -1,6 +1,5 @@
 package com.tes.android.projects.tvshowsapp.data.local.util
 
-import androidx.compose.material.ContentAlpha.medium
 import androidx.room.TypeConverter
 import com.tes.android.projects.tvshowsapp.data.remote.dto.Image
 import com.tes.android.projects.tvshowsapp.data.remote.dto.Rating

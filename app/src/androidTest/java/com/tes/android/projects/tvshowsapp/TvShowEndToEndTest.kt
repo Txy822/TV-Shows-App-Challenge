@@ -36,7 +36,6 @@ class TvShowEndToEndTest {
 
     @Test
     fun moreSectionToListScreenTest(){
-        composeRule.onRoot(useUnmergedTree = true).printToLog("Tag")
         composeRule.onAllNodes(isRoot())[54]
         composeRule.onNodeWithText("Home", useUnmergedTree = true).assertIsDisplayed()
         composeRule.onNodeWithText("Home").performClick()

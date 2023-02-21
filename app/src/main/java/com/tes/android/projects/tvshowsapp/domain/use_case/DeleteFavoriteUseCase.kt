@@ -4,11 +4,10 @@ import com.tes.android.projects.tvshowsapp.domain.model.ShowDetail
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
 import javax.inject.Inject
 
-
-class FavoriteUseCase @Inject constructor(
+class DeleteFavoriteUseCase @Inject constructor(
     private val repository: ShowRepository
 ) {
-    suspend fun addFavorite(show:ShowDetail) {
-        repository.insertFavoriteShowToDb(show)
+    suspend fun deleteFavorite(id: Int) {
+        repository.deleteFavoriteById(id)
     }
 }

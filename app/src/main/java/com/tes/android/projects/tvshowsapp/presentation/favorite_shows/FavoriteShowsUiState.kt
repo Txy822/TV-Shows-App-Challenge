@@ -7,5 +7,4 @@ data class FavoriteShowsUiState(
     val id:Int=0,
     val isLoading:Boolean =false,
     val error:String =""
-
     )

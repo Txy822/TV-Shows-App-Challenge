@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tes.android.projects.tvshowsapp.domain.model.ShowDetail
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
-import com.tes.android.projects.tvshowsapp.domain.use_case.FavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
 import com.tes.android.projects.tvshowsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,12 +16,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class ShowsViewModel @Inject constructor(
     private val repository: ShowRepository,
     private val dispatcher: CoroutineDispatcher,
-    private val favoriteUseCase: FavoriteUseCase
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
     ) : ViewModel() {
         private val _uiState = MutableStateFlow(ShowsState())
 
@@ -33,12 +34,10 @@ class ShowsViewModel @Inject constructor(
                 }
                 is ShowsEvent.OnFavoriteSelected -> {
                     _uiState.value = ShowsState(show = event.show)
-                    //_uiState.update { it.copy(show = event.show) }
                     addFavorite()
 
                 }
                 is ShowsEvent.DeleteFavorite-> {
-                     // _uiState.value = _uiState.value.copy(id = event.id)
                     _uiState.update { it.copy(id=event.id) }
                     deleteFavorite()
                 }
@@ -49,7 +48,7 @@ class ShowsViewModel @Inject constructor(
             id: Int = _uiState.value.id
         ) {
             viewModelScope.launch(dispatcher) {
-                repository.deleteFavoriteById(id)
+                deleteFavoriteUseCase.deleteFavorite(id)
             }
         }
 
@@ -57,8 +56,7 @@ class ShowsViewModel @Inject constructor(
             show: ShowDetail = _uiState.value.show
         ) {
             viewModelScope.launch(dispatcher) {
-                favoriteUseCase.addFavorite(show)
-                //repository.insertFavoriteShowToDb(show)
+                addFavoriteUseCase.addFavorite(show)
                 getShowListings()
             }
         }

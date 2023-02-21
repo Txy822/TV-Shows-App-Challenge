@@ -3,6 +3,8 @@ package com.tes.android.projects.tvshowsapp.presentation.favorite_shows
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
+import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
 import com.tes.android.projects.tvshowsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,8 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteShowsViewModel @Inject constructor(
     private val repository: ShowRepository,
-    private val dispatcher: CoroutineDispatcher
-
+    private val dispatcher: CoroutineDispatcher,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(FavoriteShowsUiState())
 
@@ -27,7 +29,6 @@ class FavoriteShowsViewModel @Inject constructor(
         when (event) {
 
             is FavoriteShowsEvent.OnDeleteSelected -> {
-              //  _uiState.value = _uiState.value.copy(id = event.id)
                 _uiState.update { it.copy(id=event.id) }
 
                 viewModelScope.launch {
@@ -42,7 +43,7 @@ class FavoriteShowsViewModel @Inject constructor(
         id: Int = _uiState.value.id
     ) {
         viewModelScope.launch(dispatcher) {
-            repository.deleteFavoriteById(id)
+            deleteFavoriteUseCase.deleteFavorite(id)
             getFavoriteShowListings()
         }
 
@@ -56,7 +57,6 @@ class FavoriteShowsViewModel @Inject constructor(
                     when (result) {
                         is Resource.Success -> {
                             result.data?.let { listings ->
-                                // copy of  current state so that we can change the listing
                                 _uiState.value = _uiState.value.copy(favoriteShows = listings, isLoading = false)
                             }
                             _uiState.value = _uiState.value.copy()

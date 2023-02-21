@@ -1,7 +1,6 @@
 package com.tes.android.projects.tvshowsapp.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
 import com.google.gson.Gson
 import com.tes.android.projects.tvshowsapp.data.local.dao.FavoriteShowDao
@@ -16,17 +15,16 @@ import com.tes.android.projects.tvshowsapp.data.remote.datasource.RemoteDataSour
 import com.tes.android.projects.tvshowsapp.data.remote.datasource.RemoteDataSourceImpl
 import com.tes.android.projects.tvshowsapp.data.repository.ShowRepositoryImpl
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
-import com.tes.android.projects.tvshowsapp.domain.use_case.FavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 
 @Module
@@ -59,9 +57,15 @@ class AppModule {
     }
 
     @Provides
-    fun provideFavoriteUseCase(repository: ShowRepository): FavoriteUseCase {
-        return FavoriteUseCase(repository)
+    fun provideAddFavoriteUseCase(repository: ShowRepository): AddFavoriteUseCase {
+        return AddFavoriteUseCase(repository)
     }
+
+    @Provides
+    fun provideDeleteFavoriteUseCase(repository: ShowRepository): DeleteFavoriteUseCase {
+        return DeleteFavoriteUseCase(repository)
+    }
+
 
     @Provides
     fun providesDatabase(app: Application): TvShowDatabase {
