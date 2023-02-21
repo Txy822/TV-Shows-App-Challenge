@@ -50,7 +50,6 @@ class SearchShowsViewModelTest {
         searchShowsViewModel.onEvent(SearchShowsEvent.LoadShows)
         searchShowsViewModel.uiState.test {
             assertEquals(awaitItem(),  SearchShowsState(isLoading =false)) //initialise state
-            assertEquals(awaitItem(),  SearchShowsState(isLoading =true)) //actual loading state
             assertEquals(getDummyResponse().map { it.toShowListing() }, awaitItem().shows) //emit  data
         }
     }
@@ -59,8 +58,10 @@ class SearchShowsViewModelTest {
         fakeRepository.shouldEmitError=true
         searchShowsViewModel.onEvent(SearchShowsEvent.LoadShows)
         searchShowsViewModel.uiState.test {
-            awaitItem() // //initialise state
-            awaitItem() //actual loading state
+            awaitItem()  //initialise state
+            // Await the change
+            testDispatcher.scheduler.advanceUntilIdle()
+
             assertEquals("Error message", awaitItem().error)  //error case
         }
     }

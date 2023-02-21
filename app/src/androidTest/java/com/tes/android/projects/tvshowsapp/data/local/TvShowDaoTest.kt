@@ -24,7 +24,6 @@ class TvShowDaoTest {
     private lateinit var database: TvShowDatabase
     private lateinit var showDao: TvShowDao
     private lateinit var favoriteShowDao: FavoriteShowDao
-
     private lateinit var showListingEntityList: MutableList<ShowListingEntity>
     private lateinit var favoriteShowListingEntityList:MutableList<FavoriteShowListingEntity>
 
@@ -42,14 +41,12 @@ class TvShowDaoTest {
         favoriteShowListingEntityList= mutableListOf()
     }
 
-
     @Test
     fun insertShowListingToDBTest() = runBlocking {
         val imageOne = Image()
         val imageTwo = Image()
         val ratingOne= Rating()
         val ratingTwo= Rating()
-
         val showOne =
             ShowListingEntity("name1", "type1", 0, imageOne, "pre", "status1", "summary1", id = 1, rating = ratingOne)
         val showTwo =
@@ -68,7 +65,6 @@ class TvShowDaoTest {
         val ratingOne= Rating()
         val showOne =
             ShowListingEntity("name1", "type1", 0, imageOne, "pre", "status1", "summary1", id = 1, rating = ratingOne)
-
         showListingEntityList.add(showOne)
         showDao.insertShowListings(showListingEntityList)
         showDao.clearShowListings()
@@ -82,7 +78,6 @@ class TvShowDaoTest {
         val ratingOne= Rating()
         val showOne =
             ShowListingEntity("name1", "type1", 0, imageOne, "pre", "status1", "summary1", id = 1, rating = ratingOne)
-
         showListingEntityList.add(showOne)
         showDao.insertShowListings(showListingEntityList)
 
@@ -98,9 +93,7 @@ class TvShowDaoTest {
 
        val favoriteShowOne =
            FavoriteShowListingEntity("name1", "type1", 0, imageOne, "pre", "status1", "summary1", id = favoriteId, rating = ratingOne)
-
        favoriteShowDao.insertFavoriteShow(favoriteShowOne)
-
        favoriteShowDao.deleteFavoriteById(favoriteId)
 
        assertThat(favoriteShowDao.getAllFavorites() .isEmpty())
@@ -112,7 +105,6 @@ class TvShowDaoTest {
     fun getAllFavoritesFromDbTest() = runBlocking {
         val imageOne = Image()
         val ratingOne= Rating()
-
         val favoriteShowOne =
             FavoriteShowListingEntity("name1", "type1", 0, imageOne, "pre", "status1", "summary1", id = 1, rating = ratingOne)
         favoriteShowDao.insertFavoriteShow(favoriteShowOne)
@@ -124,7 +116,6 @@ class TvShowDaoTest {
      fun insertFavoriteShowToDbTest()= runBlocking{
         val imageOne = Image()
         val ratingOne= Rating()
-
         val favoriteShowOne =
             FavoriteShowListingEntity("name1", "type1", 0, imageOne, "pre", "status1", "summary1", id = 1, rating = ratingOne)
         favoriteShowDao.insertFavoriteShow(favoriteShowOne)
