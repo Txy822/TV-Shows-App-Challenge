@@ -6,6 +6,7 @@ import com.tes.android.projects.tvshowsapp.domain.model.ShowDetail
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
 import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
 import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.GetShowListUseCase
 import com.tes.android.projects.tvshowsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -20,10 +21,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchShowsViewModel @Inject constructor(
-    private val repository: ShowRepository,
     private val dispatcher: CoroutineDispatcher,
     private val addFavoriteUseCase: AddFavoriteUseCase,
-    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase,
+    private val getShowListUseCase: GetShowListUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SearchShowsState())
 
@@ -80,7 +81,7 @@ class SearchShowsViewModel @Inject constructor(
         fetchFromRemote: Boolean = false
     ) {
         viewModelScope.launch(dispatcher) {
-            repository.getShowListings(fetchFromRemote, query)
+            getShowListUseCase.getShowList(fetchFromRemote=fetchFromRemote, query=query)
                 .collect { result ->
                     when (result) {
                         is Resource.Success -> {

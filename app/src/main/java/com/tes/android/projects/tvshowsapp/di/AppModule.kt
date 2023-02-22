@@ -17,6 +17,8 @@ import com.tes.android.projects.tvshowsapp.data.repository.ShowRepositoryImpl
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
 import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
 import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.GetFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.GetShowListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -66,6 +68,14 @@ class AppModule {
         return DeleteFavoriteUseCase(repository)
     }
 
+    @Provides
+    fun provideGetShowListUseCase(repository: ShowRepository): GetShowListUseCase {
+        return GetShowListUseCase(repository)
+    }
+    @Provides
+    fun provideGetFavoriteUseCase(repository: ShowRepository): GetFavoriteUseCase {
+        return GetFavoriteUseCase(repository)
+    }
 
     @Provides
     fun providesDatabase(app: Application): TvShowDatabase {

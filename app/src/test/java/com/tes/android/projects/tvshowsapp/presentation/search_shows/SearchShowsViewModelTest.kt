@@ -7,6 +7,7 @@ import com.tes.android.projects.tvshowsapp.data.repository.FakeRepository
 import com.tes.android.projects.tvshowsapp.data.repository.getDummyResponse
 import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
 import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.GetShowListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -37,6 +38,7 @@ class SearchShowsViewModelTest {
     private lateinit var fakeRepository: FakeRepository
     private lateinit var addFavoriteUseCase:AddFavoriteUseCase
     private lateinit var deleteFavoriteUseCase:DeleteFavoriteUseCase
+    private lateinit var getShowListUseCase: GetShowListUseCase
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
@@ -45,7 +47,8 @@ class SearchShowsViewModelTest {
         fakeRepository = FakeRepository()
         addFavoriteUseCase= AddFavoriteUseCase(fakeRepository)
         deleteFavoriteUseCase= DeleteFavoriteUseCase(fakeRepository)
-        searchShowsViewModel = SearchShowsViewModel(fakeRepository, testDispatcher,addFavoriteUseCase,deleteFavoriteUseCase )
+        getShowListUseCase= GetShowListUseCase(fakeRepository)
+        searchShowsViewModel = SearchShowsViewModel(testDispatcher,addFavoriteUseCase,deleteFavoriteUseCase, getShowListUseCase)
     }
 
     @Test

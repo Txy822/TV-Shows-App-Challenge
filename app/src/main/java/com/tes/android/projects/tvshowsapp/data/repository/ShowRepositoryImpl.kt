@@ -94,7 +94,6 @@ class ShowRepositoryImpl @Inject constructor(
                 return@flow //we don't make request since we have data already on db and return flow
             } else {
                 emit(Resource.Error("No  data"))
-                null // flow{null}
             }
         }
     }

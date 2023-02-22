@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
 import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
 import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.GetFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.GetShowListUseCase
 import com.tes.android.projects.tvshowsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,9 +19,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteShowsViewModel @Inject constructor(
-    private val repository: ShowRepository,
     private val dispatcher: CoroutineDispatcher,
-    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase,
+    private val  getFavoriteUseCase: GetFavoriteUseCase
+
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(FavoriteShowsUiState())
 
@@ -52,7 +55,7 @@ class FavoriteShowsViewModel @Inject constructor(
     private fun getFavoriteShowListings(
     ) {
         viewModelScope.launch(dispatcher) {
-            repository.getFavorites()
+            getFavoriteUseCase.getFavorites()
                 .collect { result ->
                     when (result) {
                         is Resource.Success -> {

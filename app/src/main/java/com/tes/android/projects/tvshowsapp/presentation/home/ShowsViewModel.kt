@@ -6,6 +6,7 @@ import com.tes.android.projects.tvshowsapp.domain.model.ShowDetail
 import com.tes.android.projects.tvshowsapp.domain.repository.ShowRepository
 import com.tes.android.projects.tvshowsapp.domain.use_case.AddFavoriteUseCase
 import com.tes.android.projects.tvshowsapp.domain.use_case.DeleteFavoriteUseCase
+import com.tes.android.projects.tvshowsapp.domain.use_case.GetShowListUseCase
 import com.tes.android.projects.tvshowsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -18,76 +19,72 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ShowsViewModel @Inject constructor(
-    private val repository: ShowRepository,
     private val dispatcher: CoroutineDispatcher,
     private val addFavoriteUseCase: AddFavoriteUseCase,
-    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
-    ) : ViewModel() {
-        private val _uiState = MutableStateFlow(ShowsState())
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase,
+    private val getShowListUseCase: GetShowListUseCase
 
-        val uiState: StateFlow<ShowsState> = _uiState.asStateFlow()
+) : ViewModel() {
+    private val _uiState = MutableStateFlow(ShowsState())
 
-        fun onEvent(event: ShowsEvent) {
-            when (event) {
-                is ShowsEvent.LoadShows -> {
-                    getShowListings()
-                }
-                is ShowsEvent.OnFavoriteSelected -> {
-                    _uiState.value = ShowsState(show = event.show)
-                    addFavorite()
+    val uiState: StateFlow<ShowsState> = _uiState.asStateFlow()
 
-                }
-                is ShowsEvent.DeleteFavorite-> {
-                    _uiState.update { it.copy(id=event.id) }
-                    deleteFavorite()
-                }
-            }
-        }
-
-        private fun deleteFavorite(
-            id: Int = _uiState.value.id
-        ) {
-            viewModelScope.launch(dispatcher) {
-                deleteFavoriteUseCase.deleteFavorite(id)
-            }
-        }
-
-        private fun addFavorite(
-            show: ShowDetail = _uiState.value.show
-        ) {
-            viewModelScope.launch(dispatcher) {
-                addFavoriteUseCase.addFavorite(show)
+    fun onEvent(event: ShowsEvent) {
+        when (event) {
+            is ShowsEvent.LoadShows -> {
                 getShowListings()
             }
-        }
+            is ShowsEvent.OnFavoriteSelected -> {
+                _uiState.value = ShowsState(show = event.show)
+                addFavorite()
 
-        private fun getShowListings(
-            query: String = "",
-
-            fetchFromRemote: Boolean = false
-        ) {
-            viewModelScope.launch(dispatcher) {
-                repository.getShowListings(fetchFromRemote, query)
-                    .collect { result ->
-                        when (result) {
-                            is Resource.Success -> {
-                                result.data?.let { listings ->
-                                    // copy of  current state so that we can change the listing
-                                    // _uiState.value = _uiState.value.copy(shows = listings)
-                                    _uiState.update { it.copy(shows=listings) }
-                                }
-                                // _uiState.value = _uiState.value.copy()
-                            }
-                            is Resource.Error -> {
-                                // _uiState.value = _uiState.value.copy(error = "Error message")
-                                _uiState.update { it.copy(error = "Error message") }
-                            }
-                            is Resource.Loading -> {
-                                // _uiState.value = _uiState.value.copy(isLoading = result.isLoading)
-                                _uiState.update { it.copy(isLoading = result.isLoading) }
-                            }
-                        }
-                    }
+            }
+            is ShowsEvent.DeleteFavorite -> {
+                _uiState.update { it.copy(id = event.id) }
+                deleteFavorite()
             }
         }
     }
+
+    private fun deleteFavorite(
+        id: Int = _uiState.value.id
+    ) {
+        viewModelScope.launch(dispatcher) {
+            deleteFavoriteUseCase.deleteFavorite(id)
+        }
+    }
+
+    private fun addFavorite(
+        show: ShowDetail = _uiState.value.show
+    ) {
+        viewModelScope.launch(dispatcher) {
+            addFavoriteUseCase.addFavorite(show)
+            getShowListings()
+        }
+    }
+
+    private fun getShowListings(
+        query: String = "",
+        fetchFromRemote: Boolean = false
+    ) {
+        viewModelScope.launch(dispatcher) {
+            getShowListUseCase.getShowList(fetchFromRemote = fetchFromRemote, query = query)
+                .collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            result.data?.let { listings ->
+                                _uiState.update { it.copy(shows = listings) }
+                            }
+                            _uiState.value = _uiState.value.copy()
+                        }
+                        is Resource.Error -> {
+                            _uiState.update { it.copy(error = "Error message") }
+                        }
+                        is Resource.Loading -> {
+                            _uiState.update { it.copy(isLoading = result.isLoading) }
+                        }
+                    }
+                }
+        }
+    }
+}

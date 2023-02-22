@@ -16,7 +16,7 @@ fun ShowListingEntity.toShowListing(): ShowDetail {
         status=status,
         summary =summary,
         premiered = premiered,
-        rating = rating!!
+        rating = rating
     )
 }
 
@@ -72,6 +72,6 @@ fun FavoriteShowListingEntity.toShowListing(): ShowDetail {
         status=status,
         summary =summary,
         premiered = premiered,
-        rating = rating!!
+        rating = rating
     )
 }
