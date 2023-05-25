@@ -33,10 +33,7 @@ class FavoriteShowsViewModel @Inject constructor(
 
             is FavoriteShowsEvent.OnDeleteSelected -> {
                 _uiState.update { it.copy(id=event.id) }
-
-                viewModelScope.launch {
                     deleteFavorite()
-                }
             }
             is FavoriteShowsEvent.LoadFavoriteShows-> getFavoriteShowListings()
         }
