@@ -9,6 +9,12 @@ It presents list of tv shows and has fetures of saving and deleting favorite sho
 ![rsz_1detail](https://user-images.githubusercontent.com/65661628/210328992-7716600b-e534-4297-937b-b065cd44da11.png)
 ![rsz_favorite](https://user-images.githubusercontent.com/65661628/210328321-3de92342-7daa-476e-b819-c2b6502a880b.png)
 
+  <img src="https://user-images.githubusercontent.com/65661628/210328313-474a6c50-7522-41e1-aca9-4edf1e571428.png" alt="Screenshot 1" style="width: 33%;" />
+  <img src="[img/img2.png](https://user-images.githubusercontent.com/65661628/210328324-22688261-3b3c-4af9-8797-5fd537d63022.png)" alt="Screenshot 2" style="width: 33%;" />
+  <img src="[img/img3.png](https://user-images.githubusercontent.com/65661628/210328327-2c4496a7-e371-49e8-aeb2-9409b964f1d2.png)" alt="Screenshot 3" style="width: 33%;" />
+  <img src="[img/img4.png](https://user-images.githubusercontent.com/65661628/210328992-7716600b-e534-4297-937b-b065cd44da11.png)" alt="Screenshot 4" style="width: 33%;" />
+  <img src="https://user-images.githubusercontent.com/65661628/210328321-3de92342-7daa-476e-b819-c2b6502a880b.png" alt="Screenshot 5" style="width: 33%;" />
+  <img src="img/img6.png" alt="Screenshot 6" style="width: 33%;" />
 
 ## Architecture 
 A well planned architecture is extremely important for an app to scale and all architectures have one common goal- to manage complexity of your app. This isn't something to be worried about in smaller apps however it may prove very useful when working on apps with longer development lifecycle and a bigger team.
