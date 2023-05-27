@@ -14,7 +14,7 @@ It presents list of tv shows and has fetures of saving and deleting favorite sho
   <img src="https://user-images.githubusercontent.com/65661628/210328327-2c4496a7-e371-49e8-aeb2-9409b964f1d2.png" alt="Screenshot 3" style="width: 33%;" />
   <img src="https://user-images.githubusercontent.com/65661628/210328992-7716600b-e534-4297-937b-b065cd44da11.png" alt="Screenshot 4" style="width: 33%;" />
   <img src="https://user-images.githubusercontent.com/65661628/210328321-3de92342-7daa-476e-b819-c2b6502a880b.png" alt="Screenshot 5" style="width: 33%;" />
-  <img src="[img/img6.png](https://github.com/Txy822/TV-Shows-App-Challenge/assets/65661628/499e5733-e4fc-4c24-868c-986abe74ac82" alt="Screenshot 6" style="width: 33%;" />
+  <img src="https://github.com/Txy822/TV-Shows-App-Challenge/assets/65661628/499e5733-e4fc-4c24-868c-986abe74ac82" alt="Screenshot 6" style="width: 33%;" />
   </div>
 
 
