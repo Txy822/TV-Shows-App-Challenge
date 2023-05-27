@@ -10,11 +10,11 @@ It presents list of tv shows and has fetures of saving and deleting favorite sho
 ![rsz_favorite](https://user-images.githubusercontent.com/65661628/210328321-3de92342-7daa-476e-b819-c2b6502a880b.png) -->
 <div style="display: flex; justify-content: center;">
   <img src="https://user-images.githubusercontent.com/65661628/210328313-474a6c50-7522-41e1-aca9-4edf1e571428.png" alt="Screenshot 1" style="width: 33%;" />
-  <img src="https://user-images.githubusercontent.com/65661628/210328324-22688261-3b3c-4af9-8797-5fd537d63022.png)" alt="Screenshot 2" style="width: 33%;" />
-  <img src="https://user-images.githubusercontent.com/65661628/210328327-2c4496a7-e371-49e8-aeb2-9409b964f1d2.png)" alt="Screenshot 3" style="width: 33%;" />
-  <img src="https://user-images.githubusercontent.com/65661628/210328992-7716600b-e534-4297-937b-b065cd44da11.png)" alt="Screenshot 4" style="width: 33%;" />
+  <img src="https://user-images.githubusercontent.com/65661628/210328324-22688261-3b3c-4af9-8797-5fd537d63022.png" alt="Screenshot 2" style="width: 33%;" />
+  <img src="https://user-images.githubusercontent.com/65661628/210328327-2c4496a7-e371-49e8-aeb2-9409b964f1d2.png" alt="Screenshot 3" style="width: 33%;" />
+  <img src="https://user-images.githubusercontent.com/65661628/210328992-7716600b-e534-4297-937b-b065cd44da11.png" alt="Screenshot 4" style="width: 33%;" />
   <img src="https://user-images.githubusercontent.com/65661628/210328321-3de92342-7daa-476e-b819-c2b6502a880b.png" alt="Screenshot 5" style="width: 33%;" />
-  <img src="[img/img6.png](https://github.com/Txy822/TV-Shows-App-Challenge/assets/65661628/499e5733-e4fc-4c24-868c-986abe74ac82)" alt="Screenshot 6" style="width: 33%;" />
+  <img src="[img/img6.png](https://github.com/Txy822/TV-Shows-App-Challenge/assets/65661628/499e5733-e4fc-4c24-868c-986abe74ac82" alt="Screenshot 6" style="width: 33%;" />
   </div>
 
 
